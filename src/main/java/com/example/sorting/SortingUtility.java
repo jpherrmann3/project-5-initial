@@ -20,7 +20,35 @@ public class SortingUtility {
 
     public static <T extends Comparable<T>> void cocktailShakerSort(T[] data) {
 
-        // TODO implement Cocktail Shaker Sort here
+        boolean swapped = true;
+        int startIndex = 0;
+        int endIndex = data.length;
+        while (swapped == true) {
+            swapped = false;
+            for (int i = startIndex; i < endIndex - 1; ++i) {
+                if (data[i].compareTo(data[i + 1]) > 0) {
+                    swap(data, i, i + 1);
+                    swapped = true;
+                }
+            }
+
+            if (swapped == false) {
+                break;
+            }
+
+            swapped = false;
+
+            endIndex = endIndex - 1;
+
+            for (int i = endIndex - 1; i >= startIndex; i--) {
+                if (data[i].compareTo(data[i + 1]) > 0) {
+                    swap(data, i, i + 1);
+                    swapped = true;
+                }
+            }
+
+            startIndex = startIndex + 1;
+        }
     }
 
 
