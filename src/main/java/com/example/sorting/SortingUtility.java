@@ -5,7 +5,16 @@ public class SortingUtility {
 
     public static <T extends Comparable<T>> void gnomeSort(T[] data) {
 
-        // TODO implement Gnome Sort here
+        int pos = 0;
+        while (pos < data.length){
+            if (pos == 0 || data[pos].compareTo(data[pos - 1]) > 0){
+                pos++;
+            }
+            else {
+                swap(data, pos, pos - 1);
+                pos = pos - 1;
+            }
+        }
     }
 
 
