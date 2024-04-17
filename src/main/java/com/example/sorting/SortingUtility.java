@@ -54,7 +54,18 @@ public class SortingUtility {
 
     public static <T extends Comparable<T>> void shellSort(T[] data) {
 
-        // TODO implement Shell Sort here
+        int n = data.length;
+
+        for (int gap = n / 2; gap > 0; gap /=2) {
+            for (int index = gap; index < n; index++) {
+                T value = data[index];
+                int indexTemp = index;
+                while (indexTemp >= gap && data[indexTemp - gap].compareTo(value) > 0) {
+                    swap(data, indexTemp - gap, indexTemp);
+                    indexTemp -= gap;
+                }
+            }
+        }
     }
 
     private static <T extends Comparable<T>> void swap(T[] data, int index1, int index2) {
