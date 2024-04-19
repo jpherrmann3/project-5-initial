@@ -32,7 +32,10 @@ public class SortingUtility {
         boolean swapped = true;
         int startIndex = 0;
         int endIndex = data.length;
+
+        // for timer
         long start = System.nanoTime();
+
         while (swapped == true) {
             swapped = false;
             for (int i = startIndex; i < endIndex - 1; ++i) {
@@ -48,7 +51,7 @@ public class SortingUtility {
 
             swapped = false;
 
-            endIndex = endIndex - 1;
+            endIndex--;
 
             for (int i = endIndex - 1; i >= startIndex; i--) {
                 if (data[i].compareTo(data[i + 1]) > 0) {
@@ -57,7 +60,7 @@ public class SortingUtility {
                 }
             }
 
-            startIndex = startIndex + 1;
+            startIndex++;
         }
         long finish = System.nanoTime();
         System.out.println("Cocktail Shaker Sort Duration: " + (finish - start));
@@ -67,9 +70,9 @@ public class SortingUtility {
     public static <T extends Comparable<T>> void shellSort(T[] data) {
 
         int n = data.length;
+        long start = System.nanoTime();
         // create the gap by length (n) / 2
         // Easier than defining gaps to start at
-        long start = System.nanoTime();
         for (int gap = n / 2; gap > 0; gap /=2) {
 
             // Do a gapped insertion sort for every elements in gaps
