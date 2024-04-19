@@ -5,16 +5,25 @@ public class SortingUtility {
 
     public static <T extends Comparable<T>> void gnomeSort(T[] data) {
 
-        int pos = 0;
-        while (pos < data.length){
-            if (pos == 0 || data[pos].compareTo(data[pos - 1]) > 0){
-                pos++;
+        int index = 0;
+        long start = System.nanoTime();
+        while (index < data.length){
+            if (index == 0 || data[index].compareTo(data[index - 1]) > 0){
+                index++;
             }
             else {
-                swap(data, pos, pos - 1);
-                pos = pos - 1;
+                int tempIndex = index;
+                while(tempIndex != 0){
+                    if (data[tempIndex].compareTo(data[tempIndex - 1]) < 0){
+                        swap(data, tempIndex, tempIndex - 1);
+                        tempIndex--;
+                    }
+                    else break;
+                }
             }
         }
+        long finish = System.nanoTime();
+        System.out.println("Gnome Sort Duration: " + (finish - start));
     }
 
 
@@ -23,6 +32,7 @@ public class SortingUtility {
         boolean swapped = true;
         int startIndex = 0;
         int endIndex = data.length;
+        long start = System.nanoTime();
         while (swapped == true) {
             swapped = false;
             for (int i = startIndex; i < endIndex - 1; ++i) {
@@ -49,23 +59,32 @@ public class SortingUtility {
 
             startIndex = startIndex + 1;
         }
+        long finish = System.nanoTime();
+        System.out.println("Cocktail Shaker Sort Duration: " + (finish - start));
     }
 
 
     public static <T extends Comparable<T>> void shellSort(T[] data) {
 
         int n = data.length;
-
+        // create the gap by length (n) / 2
+        // Easier than defining gaps to start at
+        long start = System.nanoTime();
         for (int gap = n / 2; gap > 0; gap /=2) {
+
+            // Do a gapped insertion sort for every elements in gaps
+            // Each loop leaves a[0..gap-1] in gapped order
             for (int index = gap; index < n; index++) {
                 T value = data[index];
-                int indexTemp = index;
+                int indexTemp = index; // need temporary variable to use for index pointer.
                 while (indexTemp >= gap && data[indexTemp - gap].compareTo(value) > 0) {
                     swap(data, indexTemp - gap, indexTemp);
                     indexTemp -= gap;
                 }
             }
         }
+        long finish = System.nanoTime();
+        System.out.println("Shell Sort Duration: " + (finish - start));
     }
 
     private static <T extends Comparable<T>> void swap(T[] data, int index1, int index2) {
